@@ -1,0 +1,7 @@
+spring:
+  application:
+   name: bruno-license-server
+server:
+  port: 9090
+  servlet:
+    context-path: /api
