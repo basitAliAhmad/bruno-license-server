@@ -39,8 +39,7 @@ public class LicenseActivationServiceImpl implements LicenseActivationService {
      * }}
      */
     private final String JWT_HEADER = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9";
-//    private final String JWT_SIGNATURE = "czhmSzl2TDJ4UTdtWXBSNE53M1VjVDZaYUIxSGRFNUpyMFdxWHlWdVA4TQo=";
-    private final String JWT_SIGNATURE = "c2lnbmF0dXJl";
+    private final String JWT_SIGNATURE = "czhmSzl2TDJ4UTdtWXBSNE53M1VjVDZaYUIxSGRFNUpyMFdxWHlWdVA4TQo";
 
     private final static Map<UUID, LicenseActivation> PENDING_ACTIVATIONS = new ConcurrentHashMap<>();
 
@@ -98,8 +97,11 @@ public class LicenseActivationServiceImpl implements LicenseActivationService {
 
         PENDING_ACTIVATIONS.remove(activationId);
 
-        return JWT_HEADER + "." + Base64.getEncoder().encodeToString(objectMapper.writeValueAsBytes(payload))
-                + "." + JWT_SIGNATURE;
+        return "%s.%s.%s".formatted(
+            JWT_HEADER,
+            Base64.getEncoder().withoutPadding().encodeToString(objectMapper.writeValueAsBytes(payload)),
+            JWT_SIGNATURE
+        );
     }
 
     @Override
