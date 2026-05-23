@@ -62,7 +62,7 @@ class LicenseControllerIntegrationTest {
         mockMvc.perform(post("/v2/license/activate")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(buildRequest())))
-                .andExpect(jsonPath("$.status").value("ACTIVATED"));
+                .andExpect(jsonPath("$.status").value("activated"));
     }
 
     @Test

@@ -2,12 +2,15 @@ package com.bebasit.brunolicenseserver.dto.pojo;
 
 import com.bebasit.brunolicenseserver.common.LicensePlan;
 import com.bebasit.brunolicenseserver.common.LicenseType;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
-import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
