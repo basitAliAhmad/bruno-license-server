@@ -2,6 +2,9 @@
 
 A self-hosted license server for [Bruno](https://www.usebruno.com/) built with Spring Boot. It implements the license activation and verification API that Bruno clients communicate with, allowing you to run your own license backend.
 
+> **⚠️ DISCLAIMER**: This project is for **development and educational purposes only**. If you like Bruno and use it professionally, please [purchase a legitimate license](https://www.usebruno.com/pricing) to support the developers.
+
+
 ## Tech Stack
 
 - **Java 21**
