@@ -5,3 +5,8 @@ server:
   port: 9090
   servlet:
     context-path: /api
+
+rate-limiter:
+  capacity: 10
+  refill-tokens: 10
+  refill-duration-minutes: 1

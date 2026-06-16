@@ -20,7 +20,9 @@ import java.util.Map;
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.matchesPattern;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -45,6 +47,26 @@ class LicenseControllerIntegrationTest {
         Field field = LicenseActivationServiceImpl.class.getDeclaredField("PENDING_ACTIVATIONS");
         field.setAccessible(true);
         ((Map<?, ?>) field.get(null)).clear();
+    }
+
+    // --- GET /status ---
+
+    @Test
+    void status_returns200() throws Exception {
+        mockMvc.perform(get("/status"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void status_returnsServerIsRunningMessage() throws Exception {
+        mockMvc.perform(get("/status"))
+                .andExpect(content().string("Server is running"));
+    }
+
+    @Test
+    void status_returnsPlainTextContentType() throws Exception {
+        mockMvc.perform(get("/status"))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_PLAIN));
     }
 
     // --- POST /v2/license/activate ---

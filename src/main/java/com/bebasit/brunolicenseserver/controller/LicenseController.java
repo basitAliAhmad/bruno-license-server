@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,12 +20,18 @@ import java.util.Map;
 import java.util.UUID;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.TEXT_PLAIN_VALUE;
 
 @Slf4j
 @RestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class LicenseController {
     private final LicenseActivationService licenseActivationService;
+
+    @GetMapping(value = "status", produces = TEXT_PLAIN_VALUE)
+    public ResponseEntity<String> getStatus() {
+        return ResponseEntity.ok("Server is running");
+    }
 
     @PostMapping(value = "/v2/license/activate", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<ActivateLicenseResponseDto> activateLicense(@RequestBody ActivateLicenseRequestDto request) {
